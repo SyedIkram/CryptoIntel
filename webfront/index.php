@@ -846,13 +846,8 @@ function fetchforPie(chartID){
 <script>
 
 function liveTrades(){
-
-var eLC = document.getElementById("liveTradesStreamSelector");
-var sLC = eLC.options[eLC.selectedIndex].value;
-
-
 var streamUrl = "https://streamer.cryptocompare.com/";
-var fsym = sLC;
+var fsym = "BTC";
 var tsym = "USD";
 var currentSubs;
 var currentSubsText = "";
@@ -860,10 +855,11 @@ var dataUrl = "https://min-api.cryptocompare.com/data/subs?fsym=" + fsym + "&tsy
 var socket = io(streamUrl);
 
 $.getJSON(dataUrl, function(data) {
-	currentSubs = data['USD']['FULLORDERBOOK'];
+	currentSubs = data['USD']['TRADES'];
 	for (var i = 0; i < currentSubs.length; i++) {
 		currentSubsText += currentSubs[i] + ", ";
-	}
+    }
+    
 	$('#sub-exchanges').text(currentSubsText);
 	socket.emit('SubAdd', { subs: currentSubs });
 });
@@ -879,7 +875,7 @@ var transformData = function(data) {
 	var coinfsym = CCC.STATIC.CURRENCY.getSymbol(fsym);
 	var cointsym = CCC.STATIC.CURRENCY.getSymbol(tsym)
 	var incomingTrade = CCC.TRADE.unpack(data);
-	console.log(incomingTrade);
+	
 	var newTrade = {
 		Market: incomingTrade['M'],
 		Type: incomingTrade['T'],
@@ -905,7 +901,7 @@ var transformData = function(data) {
 var displayData = function(dataUnpacked) {
 	var maxTableSize = 7;
     var length = $('#tableMain tr').length;
-    
+    console.log("Hello" + dataUnpacked);
     if(dataUnpacked.Type == "BUY" && dataUnpacked.Type != "UNKNOWN"){
         $('#trades1').after("<tr >"+
         "<td class='coin-name'   style='color:#028900;'>" + dataUnpacked.Market + "</td>"+
@@ -931,21 +927,13 @@ var displayData = function(dataUnpacked) {
 		$('#tableMain tr:last').remove();
 	}
 };
-$(document).on('change','#liveTradesStreamSelector',function(){
-    var eLC2 = document.getElementById("liveTradesStreamSelector");
-    var sLC2 = eLC2.options[eLC2.selectedIndex].value;
-
-    socket.emit('SubRemove', { subs: currentSubs });
-    $("#LiveTradeSymbolID").text(sLC2)
-    liveTrades();
-});
-
 }
-    
-function closeSocket(){
+window.onbeforeunload = popup;
+
+function popup() {
     socket.emit('SubRemove', { subs: currentSubs });
-    // alert('Bye');
 }
+
 
 </script>
 

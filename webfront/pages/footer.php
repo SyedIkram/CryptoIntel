@@ -17,7 +17,7 @@
     zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
     ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <?php 
 
         $scripts = array("assets/js/popper.min.js",
@@ -33,9 +33,9 @@
         "assets/js/plugins.js",
         "assets/js/bar-chart.js",
         "assets/js/plugins.js",
-        "assets/js/stream.js",
         "assets/js/ccc-streamer-utilities.js",
         "assets/js/scripts.js",
+        
     "assets/js/jquery.slicknav.min.js");
 
         foreach ($scripts as $scVal) {
