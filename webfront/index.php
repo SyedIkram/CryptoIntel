@@ -76,7 +76,7 @@ $resultLV    = $futureLV->get();
                             echo "<p>24 H</p>";
                             echo "</div>";
                             echo "<div class='d-flex justify-content-between pb-2'>";
-                            echo "<h2 id='FULLVOLUMETO_".$resultLV[$x]['symbol']."'></h2>";
+                            echo "<h5 id='FULLVOLUMETO_".$resultLV[$x]['symbol']."'></h5>";
                             echo "<span id='CHANGE24HOUR_".$resultLV[$x]['symbol']."'></span>";
                             echo "</div>";
                             echo "</div>";
@@ -422,7 +422,7 @@ $resultLV    = $futureLV->get();
 }
 
 .my-float{
-	margin-top:22px;
+	margin-top:16px;
 }
 
     </style>
@@ -466,7 +466,7 @@ $resultLV    = $futureLV->get();
 </div>
 
 <a href="#" class="float" data-toggle="modal" data-target="#exampleModalCenter">
-<i class="fa fa-plus my-float"></i>
+<i class="fa fa-question-circle-o fa-2x my-float"></i>
 </a>
 </body>
 
@@ -482,9 +482,6 @@ $resultLV    = $futureLV->get();
 
 
 <script>
-
-
-
 
 
 $(document).on('change','#LiveBarChartSelctor',function(){
@@ -863,7 +860,7 @@ var dataUrl = "https://min-api.cryptocompare.com/data/subs?fsym=" + fsym + "&tsy
 var socket = io(streamUrl);
 
 $.getJSON(dataUrl, function(data) {
-	currentSubs = data['USD']['TRADES'];
+	currentSubs = data['USD']['FULLORDERBOOK'];
 	for (var i = 0; i < currentSubs.length; i++) {
 		currentSubsText += currentSubs[i] + ", ";
 	}
