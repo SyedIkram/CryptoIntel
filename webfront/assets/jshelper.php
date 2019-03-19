@@ -219,7 +219,10 @@ function liveBarChart(allSymbols,allVolume,yaxisval){
 }
 }
 
+</script>
 
+
+<script>
 $(document).ready(function() {
 
 var currentPrice = {};
@@ -228,8 +231,6 @@ var socket = io.connect('https://streamer.cryptocompare.com/');
 //Use SubscriptionId 0 for TRADE, 2 for CURRENT, 5 for CURRENTAGG eg use key '5~CCCAGG~BTC~USD' to get aggregated data from the CCCAGG exchange 
 //Full Volume Format: 11~{FromSymbol} eg use '11~BTC' to get the full volume of BTC against all coin pairs
 //For aggregate quote updates use CCCAGG ags market
-
-
 <?php 
 $cma = 0;
 echo 'var subscription = [';
@@ -246,7 +247,7 @@ for ($x = 0; $x <= 2; $x++) {
 ?>
 socket.emit('SubAdd', { subs: subscription });
 socket.on("m", function(message) {
-    console.log(message);
+    // console.log(message);
     var messageType = message.substring(0, message.indexOf("~"));
     if (messageType == CCC.STATIC.TYPE.CURRENTAGG) {
         dataUnpack(message);
@@ -338,4 +339,84 @@ var displayData = function(messageToDisplay, from, tsym, fsym) {
 });
 
 
+
+
+function liveL2OrderBook(){
+
+// var eLC = document.getElementById("L2orderSymbolSelector");
+// var sLC = eLC.options[eLC.selectedIndex].value;
+
+
+
+var Market = "Binance"
+var fsym = "BTC";
+var tsym = "USD";
+var api_key="23489088ccc5e95cef763cbedd2d27588a979595edb097f53f40ad7d76239d41";
+var Url = "https://min-api.cryptocompare.com/data/ob/l2/snapshot?fsym=" + fsym + "&e=" + Market + "&api_key=" + api_key;
+
+console.log(Url);
+
+var maxTableSize = 3;
+var length = $('#l2orderBid tr').length;
+var length2 = $('#l2orderAsks tr').length;
+
+$.getJSON(Url, function(data3) {
+
+
+    if(data3['Response'] == 'Success'){
+        for (var i = 0 ; i<3 ; ++i){
+        if (length>= (maxTableSize)) {
+            $('#l2orderBid tr:last').remove();
+        }
+        if (length2>= (maxTableSize)) {
+            $('#l2orderAsks tr:last').remove();
+        }
+        $('#l2orderBidBody').after("<tr>"+
+        "<td class='coin-name'   style='color:#028900;'>" + Market+"</td>"+
+        "<td class='attachments' style='color:#028900;'>" +fsym + "</td>"+
+        "<td class='attachments' style='color:#028900;'>" +  data3['Data']['bids'][i]+  "</td>"+
+        "</tr>");
+        $('#l2orderAsksBody').after("<tr>"+
+        "<td class='coin-name'   style='color:#cb2424;'>" + Market+"</td>"+
+        "<td class='attachments' style='color:#cb2424;'>" +fsym + "</td>"+
+        "<td class='attachments' style='color:#cb2424;'>" +  data3['Data']['asks'][i]+  "</td>"+
+        "</tr>");
+    }
+}
+else {
+    $('#l2orderBidBody').after("<tr>"+
+        "<td class='coin-name'   style='color:#028900;'>" + Market + " is not valid. </td>"+
+        "<td class='attachments' style='color:#028900;'>Market does not exist</td>"+
+        "<td class='attachments' style='color:#028900;'> </td>"+
+        "</tr>");
+        $('#l2orderAsksBody').after("<tr>"+
+        "<td class='coin-name'   style='color:#028900;'>" + Market + " is not valid. </td>"+
+        "<td class='attachments' style='color:#028900;'>Market does not exist</td>"+
+        "<td class='attachments' style='color:#028900;'> </td>"+
+        "</tr>"); 
+
+        if (length>= (maxTableSize)) {
+            $('#l2orderBid tr:last').remove();
+        }
+        if (length2>= (maxTableSize)) {
+            $('#l2orderAsks tr:last').remove();
+        }
+}
+
+    
+    
+    
+
+});
+
+
+}
+$(document).on('change','#L2orderSymbolSelector',function(){
+  
+    // var eLC2 = document.getElementById("L2orderSymbolSelector");
+    // var sLC2 = eLC2.options[eLC2.selectedIndex].value;
+    // alert(sLC2);
+    // $("#LiveTradeSymbolID").text(sLC2)
+    liveL2OrderBook();
+});
 </script>
