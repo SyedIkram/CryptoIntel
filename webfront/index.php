@@ -197,90 +197,62 @@ $resultLV    = $futureLV->get();
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-sm-flex justify-content-between align-items-center">
-                                    <h4 class="header-title">Trading History</h4>
+                                    <h4 class="header-title">L2 Order Book (BTC - USD)</h4>
                                     <div class="trd-history-tabs">
                                         <ul class="nav" role="tablist">
                                             <li>
-                                                <a class="active" data-toggle="tab" href="#buy_order" role="tab">Buy Order</a>
+                                                <a class="active" data-toggle="tab" href="#buy_order" role="tab">Bids</a>
                                             </li>
                                             <li>
-                                                <a data-toggle="tab" href="#sell_order" role="tab">Sell Order</a>
+                                                <a data-toggle="tab" href="#sell_order" role="tab">Asks</a>
                                             </li>
                                         </ul>
                                     </div>
-                                    <select class="custome-select border-0 pr-3">
-                                        <option selected>Last 24 Hours</option>
-                                        <option value="0">01 July 2018</option>
-                                    </select>
+                                    <a href="#">Click Here for More</a>
+                                    <!-- <select id="L2orderSymbolSelector" class="custome-select border-0 pr-3"> -->
+                                    <?php 
+                                    // foreach ($resultLV as $row){
+                                    //             if ($row['symbol'] == "BTC"){
+                                    //                 echo "<option selected val='".$row['symbol']."'>".$row['symbol']."</option>";
+                                    //             }
+                                    //             else{
+                                    //                 echo "<option val='".$row['symbol']."'>".$row['symbol']."</option>";
+                                    //             }
+                                    //         }
+                                            
+                                        ?>
+                                    <!-- </select> -->
                                 </div>
                                 <div class="trad-history mt-4">
                                     <div class="tab-content" id="myTabContent">
                                         <div class="tab-pane fade show active" id="buy_order" role="tabpanel">
                                             <div class="table-responsive">
-                                                <table class="dbkit-table">
-                                                    <tr class="heading-td">
-                                                        <td>Trading ID</td>
-                                                        <td>Time</td>
-                                                        <td>Status</td>
-                                                        <td>Amount</td>
-                                                        <td>Last Trade</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>78211</td>
-                                                        <td>4.00 AM</td>
-                                                        <td>Pending</td>
-                                                        <td>$758.90</td>
-                                                        <td>$05245.090</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>782782</td>
-                                                        <td>4.00 AM</td>
-                                                        <td>Pending</td>
-                                                        <td>$77878.90</td>
-                                                        <td>$7778.090</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>89675978</td>
-                                                        <td>4.00 AM</td>
-                                                        <td>Pending</td>
-                                                        <td>$0768.90</td>
-                                                        <td>$0945.090</td>
-                                                    </tr>
-                                                </table>
+                                            <table class="table dbkit-table" id = "l2orderBid">
+                                        <thead>
+                                            <tr style="border-bottom: 1px solid #7a7a7a;">
+                                                <td><h6 style="color:#000;">Market</h5></td>
+                                                <td><h6 style="color:#000;">Coin</h6></td>
+                                                <td><h6 style="color:#000;">Bid</h6></td>
+                                            </tr>
+                                        
+                                        <tbody id="l2orderBidBody">
+                                        </tbody>
+                                    </table>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="sell_order" role="tabpanel">
                                             <div class="table-responsive">
-                                                <table class="dbkit-table">
-                                                    <tr class="heading-td">
-                                                        <td>Trading ID</td>
-                                                        <td>Time</td>
-                                                        <td>Status</td>
-                                                        <td>Amount</td>
-                                                        <td>Last Trade</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>8964978</td>
-                                                        <td>4.00 AM</td>
-                                                        <td>Pending</td>
-                                                        <td>$445.90</td>
-                                                        <td>$094545.090</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>89675978</td>
-                                                        <td>4.00 AM</td>
-                                                        <td>Pending</td>
-                                                        <td>$78.90</td>
-                                                        <td>$074852945.090</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>78527878</td>
-                                                        <td>4.00 AM</td>
-                                                        <td>Pending</td>
-                                                        <td>$0768.90</td>
-                                                        <td>$65465.090</td>
-                                                    </tr>
-                                                </table>
+                                            <table class="table dbkit-table" id = "l2orderAsks">
+                                        <thead>
+                                            <tr style="border-bottom: 1px solid #7a7a7a;">
+                                                <td><h6 style="color:#000;">Market</h5></td>
+                                                <td><h6 style="color:#000;">Coin</h6></td>
+                                                <td><h6 style="color:#000;">Ask</h6></td>
+                                            </tr>
+                                        
+                                        <tbody id="l2orderAsksBody">
+                                        </tbody>
+                                    </table>
                                             </div>
                                         </div>
                                     </div>
@@ -600,7 +572,7 @@ function livechartController(){
             p = p+1;
         });
         liveBarChart(allSymbols,allVolume,sLC);
-        console.log(allVolume);
+        // console.log(allVolume);
     });
 
 
@@ -642,6 +614,7 @@ var ms500intr = setInterval(function (){
 
     window.onload = function() {
         liveTrades();
+        liveL2OrderBook();
         livechartController();
         <?php 
         $colorPalletMainVolGraphBack = ["rgba(240, 180, 26, 0.1)",'rgba(117, 19, 246, 0.1)',"rgba(247, 163, 58, 0.1)"];
@@ -662,11 +635,15 @@ var ms500intr = setInterval(function (){
         return dt;
     }
 
+// Interval for L2 Snapshot
+var l2orderinterval = setInterval(function(){
+    liveL2OrderBook();
+},120000);
 
 
 
 var livebarchartinterval = setInterval(function(){
-    
+    liveL2OrderBook();
     livechartController();
 
 
@@ -901,7 +878,7 @@ var transformData = function(data) {
 var displayData = function(dataUnpacked) {
 	var maxTableSize = 7;
     var length = $('#tableMain tr').length;
-    console.log("Hello" + dataUnpacked);
+    // console.log("Hello" + dataUnpacked);
     if(dataUnpacked.Type == "BUY" && dataUnpacked.Type != "UNKNOWN"){
         $('#trades1').after("<tr >"+
         "<td class='coin-name'   style='color:#028900;'>" + dataUnpacked.Market + "</td>"+
