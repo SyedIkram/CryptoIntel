@@ -1,0 +1,48 @@
+CREATE KEYSPACE crypton
+WITH REPLICATION = {'class': 'SimpleStrategy', 'replication_factor': 2 };
+
+//NEWS CC TABLE
+CREATE TABLE IF NOT EXISTS news_cc (
+    body TEXT,
+    categories list<text>,
+    downvotes TEXT,
+    guid TEXT,
+    id INT,
+    imageurl TEXT,
+    lang TEXT,
+    published_on TIMESTAMP,
+    source TEXT,
+    source_info_img TEXT,
+    source_info_lang TEXT,
+    source_info_name TEXT,
+    tags list<text>,
+    title TEXT,
+    upvotes INT,
+    url TEXT,
+    PRIMARY KEY (id)
+)
+
+CREATE TABLE IF NOT EXISTS all_coins (
+    Id INT,
+    Url TEXT,
+    ImageUrl TEXT,
+    Name TEXT,
+    Symbol TEXT,
+    CoinName TEXT,
+    FullName TEXT,
+    Algorithm TEXT,
+    FullyPremined INT,
+    TotalCoinSupply DOUBLE,
+    SortOrder INT,
+    Sponsored TEXT,
+    IsTrading TEXT,
+    TotalCoinsMined DOUBLE,
+    BlockNumber INT,
+    NetHashesPerSecond DOUBLE,
+    BlockReward FLOAT,
+    BlockTime INT,
+    PRIMARY KEY(I
+    
+CREATE TABLE top10data( maintainer, sortorder INT, symbol TEXT, coin_id INT, coinname TEXT, imageurl TEXT, firstalpha TEXT, PRIMARY KEY (maintainer,sortorder, symbol) );
+
+    
