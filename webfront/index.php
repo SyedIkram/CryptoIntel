@@ -3,6 +3,7 @@
 // VARS
 $cur_dir='';
 $PIE_COUNT = 4;
+$tile_current = 'Home';
 ?>
 
 <?php include 'pages/header.php';?>
@@ -55,7 +56,7 @@ $resultLV    = $futureLV->get();
                         <div class="breadcrumbs-area clearfix">
                             <h4 class="page-title pull-left">Dashboard</h4>
                             <ul class="breadcrumbs pull-left">
-                                <li><a href="index.html">Home</a></li>
+                            <li><a href="<?php echo $cur_dir; ?>">Home</a></li>
                                 <li><span>Dashboard</span></li>
                             </ul>
                         </div>
@@ -438,7 +439,7 @@ $resultLV    = $futureLV->get();
 </div>
 
 <a href="#" class="float" data-toggle="modal" data-target="#exampleModalCenter">
-<i class="fa fa-question-circle-o fa-2x my-float"></i>
+<i class="fa fa-question-circle fa-2x my-float"></i>
 </a>
 </body>
 

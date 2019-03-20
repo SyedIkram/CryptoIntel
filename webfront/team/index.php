@@ -3,6 +3,7 @@
 // VARS
 $cur_dir='../';
 $PIE_COUNT = 4;
+$tile_current = 'The Team';
 ?>
 
 <?php include $cur_dir.'pages/header.php';?>
@@ -56,7 +57,7 @@ $resultLV    = $futureLV->get();
                             <h4 class="page-title pull-left">Dashboard</h4>
                             <ul class="breadcrumbs pull-left">
                                 <li><a href="<?php echo $cur_dir; ?>">Home</a></li>
-                                <li><span>Team</span></li>
+                                <li><span><?php echo $tile_current;?></span></li>
                             </ul>
                         </div>
                     </div>
@@ -65,7 +66,7 @@ $resultLV    = $futureLV->get();
             <div class="main-content-inner">
                 <!-- color pricing start -->
                 <div class="card-body">
-                                        <h1 style="text-align: center;">The Team</h1>
+                                        <h1 style="text-align: center;"><?php echo $tile_current;?></h1>
                 </div>
                 <div class="row">
                 <div class="col-xl-4 col-ml-6 col-mdl-4 col-sm-6 mt-5">
