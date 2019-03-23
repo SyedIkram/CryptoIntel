@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS news_cc (
     id INT,
     imageurl TEXT,
     lang TEXT,
-    published_on TIMESTAMP,
+    published_on FLOAT,
     source TEXT,
     source_info_img TEXT,
     source_info_lang TEXT,
