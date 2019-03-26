@@ -1,10 +1,9 @@
 <footer>
             <div class="footer-area">
-                <p><?php echo $title; ?> © Copyright 2018. All right reserved</p>
+                <p><?php echo $title; ?> © Copyright 2019. All right reserved</p>
             </div>
         </footer>
         
-<script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -20,7 +19,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <?php 
 
-        $scripts = array("assets/js/popper.min.js",
+        $scripts = array("assets/js/vendor/jquery-2.2.4.min.js","assets/js/popper.min.js",
         "assets/js/popper.min.js",
         "assets/js/bootstrap.min.js",
         "assets/js/popper.min.js",
