@@ -179,10 +179,10 @@ $resultLV    = $futureLV->get();
                                 
 
                                 for ($x = 0; $x <= 6; $x++) {
-                                    echo '<li>';
+                                    echo '<li><a style="color:#000 !important;" href="coins/?coinsymbol='.$resultLV[$x]['symbol'].'">';
                                     echo '<div class="icon '.$resultLV[$x]['firstalpha'].'">'.$resultLV[$x]['firstalpha'].'</div> '.$resultLV[$x]['coinname'].'<span><i id="livecoin'.$resultLV[$x]['symbol'].'Arrow" class="fa fa-long-arrow-up" ></i>$ <b id="livecoin'.$resultLV[$x]['symbol'].'">0.0</b></span></li>';
 
-                                    echo '</li>';
+                                    echo '</a></li>';
                                     } 
                                 ?>
 
