@@ -1,12 +1,62 @@
-c = get_config()
+CREATE KEYSPACE crypton
+WITH REPLICATION = {'class': 'SimpleStrategy', 'replication_factor': 2 };
+
+//NEWS CC TABLE
+CREATE TABLE IF NOT EXISTS news_cc (
+    body TEXT,
+    categories list<text>,
+    downvotes TEXT,
+    guid TEXT,
+    id INT,
+    imageurl TEXT,
+    lang TEXT,
+    published_on TIMESTAMP,
+    source TEXT,
+    source_info_img TEXT,
+    source_info_lang TEXT,
+    source_info_name TEXT,
+    tags list<text>,
+    title TEXT,
+    upvotes INT,
+    url TEXT,
+    PRIMARY KEY (id)
+)
+
+CREATE TABLE IF NOT EXISTS all_coins (
+    Id INT,
+    Url TEXT,
+    ImageUrl TEXT,
+    Name TEXT,
+    Symbol TEXT,
+    CoinName TEXT,
+    FullName TEXT,
+    Algorithm TEXT,
+    FullyPremined INT,
+    TotalCoinSupply DOUBLE,
+    SortOrder INT,
+    Sponsored TEXT,
+    IsTrading TEXT,
+    TotalCoinsMined DOUBLE,
+    BlockNumber INT,
+    NetHashesPerSecond DOUBLE,
+    BlockReward FLOAT,
+    BlockTime INT,
+    PRIMARY KEY(I
     
-# Kernel config
-c.IPKernelApp.pylab = 'inline'  # if you want plotting support always in your notebook
-    
-# Notebook config
-c.NotebookApp.certfile = u'/home/tkapoor/certs/mycert.pem' #location of your certificate file
-c.NotebookApp.ip = '0.0.0.0'
-c.NotebookApp.open_browser = False  #so that the ipython notebook does not opens up a browser by default
-c.NotebookApp.password = u'sha1:1a57430e30e3:28a03203c0ae291c3a6a9156212ee4e461e17cb0'  #the encrypted password we generated above
-# Set the port to 8888, the port we set up in the AWS EC2 set-up
-c.NotebookApp.port = 8888
+CREATE TABLE top10data( maintainer, sortorder INT, symbol TEXT, coin_id INT, coinname TEXT, imageurl TEXT, firstalpha TEXT, PRIMARY KEY (maintainer,sortorder, symbol) );
+
+
+CREATE TABLE IF NOT EXISTS team (
+    id uuid,
+    name TEXT,
+    email TEXT,
+    linkedin TEXT,
+    git TEXT,
+imgurl TEXT, 
+    PRIMARY KEY (id)
+)
+INSERT INTO team (id,name,email,linkedin,git,imgurl) VALUES (uuid(),'Mehak Parashar','mehakparashar@yahoo.co.in','https://www.linkedin.com/in/mehakparashar','na','mparasha.png');
+
+INSERT INTO team (id,name,email,linkedin,git,imgurl) VALUES (uuid(),'Tushar Chand Kapoor','tckapoor9@gmail.com','https://www.linkedin.com/in/tusharchandkapoor','https://github.com/tusharck','tkapoor.png');
+
+INSERT INTO team (id,name,email,linkedin,git,imgurl) VALUES (uuid(),'Syed Ikram','syedikram62@gmail.com','https://www.linkedin.com/in/iksyed','na','sikram.png');

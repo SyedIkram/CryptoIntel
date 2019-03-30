@@ -3,7 +3,7 @@
 // VARS
 $cur_dir='../';
 $PIE_COUNT = 4;
-$tile_current = 'Topic Modeling';
+$tile_current = 'Live Sentiment Analysis';
 ?>
 
 <?php include $cur_dir.'pages/header.php';?>
@@ -24,11 +24,8 @@ $tile_current = 'Topic Modeling';
                             <span></span>
                             <span></span>
                         </div>
-                        <div class="search-box pull-left">
-                            <form action="#">
-                                <input type="text" name="search" placeholder="Search..." required>
-                                <i class="ti-search"></i>
-                            </form>
+                        <div class="logo pull-left">
+                        <a style ="margin-top:10px !important" href=<?php echo $cur_dir?>><img src= <?php echo $cur_dir."assets/images/icon/logo2.png";?> alt="logo"></a>
                         </div>
                      </div>
                     </div>
