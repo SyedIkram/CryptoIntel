@@ -12,11 +12,14 @@ if __name__ == "__main__":
     session = cluster.connect()
     session.set_keyspace('crypton') 
 
+    SYM = 'BCH'
+    SYM_id = 202330
+
     scaler = MinMaxScaler(feature_range=(0, 1))
 
-    model = load_model('BTCmodel.h5')
+    model = load_model('/home/tkapoor/Big_Data_2_project/models/'+SYM+'model.h5')
 
-    url = 'https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=1'
+    url = 'https://min-api.cryptocompare.com/data/histoday?fsym='+SYM+'&tsym=USD&limit=1'
     page = requests.get(url)
     data_cc = page.json()
 
@@ -46,5 +49,5 @@ if __name__ == "__main__":
 
     df['predicted_weight']=predicted_weight
 
-    query = "INSERT INTO predictedprice (id,price,symbol) VALUES (1182,"+ str(df['predicted_weight'][0])+",'BTC');"
+    query = "INSERT INTO predictedprice (id,price,symbol) VALUES ("+str(SYM_id)+","+ str(df['predicted_weight'][0])+",'"+SYM+"');"
     future = session.execute(query)
