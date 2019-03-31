@@ -184,12 +184,32 @@ include $cur_dir.'pages/header.php';
                     <!-- Statistics area end -->
                     <!-- Advertising area start -->
                     <div class="col-lg-4 mt-5">
+                        <!-- <div class="card h-full"> -->
                         <div class="card h-full">
-                            <div class="card-body">
-                                <h4 class="header-title">OHLC <span id="OHLCrange"></span></h4>
-                                <!-- <canvas id="seolinechart8" height="233"></canvas> -->
-                                <div id="socialads" style="height: 345px;"></div>
+                            <div class="pricing-list">
+                                <div class="prc-head">
+                                    <h4>Predicted* <?php
+                                        date_default_timezone_set('America/Los_Angeles');
+                                    echo '<b>'.$tile_current.'</b> Price for <br>'.date("Y-m-d", strtotime("+1 day")).' PST';?> </h4>
+                                </div>
+                                <div class="prc-list">
+                                    <br>
+                                    <br>
+                                    <?php
+                                        $statementLV2 = new Cassandra\SimpleStatement(  
+                                            "SELECT price from predictedprice WHERE id=".$coin_id
+                                        );
+                                        $futureLV2    = $session->executeAsync($statementLV2);  
+                                        $resultLV2    = $futureLV2->get();    
+                                    ?>
+                                    <ul>
+                                        <li class="bold"><h1>$ <?php  echo number_format((float)$resultLV2[0]['price'], 4, '.', '');?></h1></li>
+                                    </ul>
+                                    <br>
+                                    <br>
+                                </div>
                             </div>
+                        <!-- </div> -->
                         </div>
                     </div>
                     <!-- Advertising area end -->
@@ -205,64 +225,11 @@ include $cur_dir.'pages/header.php';
                     <!-- sales area end -->
                     <!-- timeline area start -->
                     <div class="col-xl-4 col-ml-4 col-lg-4 mt-5">
-                        <div class="card">
+                    <div class="card h-full">
                             <div class="card-body">
-                                <h4 class="header-title">Timeline</h4>
-                                <div class="timeline-area">
-                                    <div class="timeline-task">
-                                        <div class="icon bg1">
-                                            <i class="fa fa-envelope"></i>
-                                        </div>
-                                        <div class="tm-title">
-                                            <h4>Rashed sent you an email</h4>
-                                            <span class="time"><i class="ti-time"></i>09:35</span>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
-                                        </p>
-                                    </div>
-                                    <div class="timeline-task">
-                                        <div class="icon bg2">
-                                            <i class="fa fa-exclamation-triangle"></i>
-                                        </div>
-                                        <div class="tm-title">
-                                            <h4>Rashed sent you an email</h4>
-                                            <span class="time"><i class="ti-time"></i>09:35</span>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
-                                        </p>
-                                    </div>
-                                    <div class="timeline-task">
-                                        <div class="icon bg2">
-                                            <i class="fa fa-exclamation-triangle"></i>
-                                        </div>
-                                        <div class="tm-title">
-                                            <h4>Rashed sent you an email</h4>
-                                            <span class="time"><i class="ti-time"></i>09:35</span>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-task">
-                                        <div class="icon bg3">
-                                            <i class="fa fa-bomb"></i>
-                                        </div>
-                                        <div class="tm-title">
-                                            <h4>Rashed sent you an email</h4>
-                                            <span class="time"><i class="ti-time"></i>09:35</span>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
-                                        </p>
-                                    </div>
-                                    <div class="timeline-task">
-                                        <div class="icon bg3">
-                                            <i class="ti-signal"></i>
-                                        </div>
-                                        <div class="tm-title">
-                                            <h4>Rashed sent you an email</h4>
-                                            <span class="time"><i class="ti-time"></i>09:35</span>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
-                                        </p>
-                                    </div>
-                                </div>
+                                <h4 class="header-title">OHLC <span id="OHLCrange"></span></h4>
+                                <!-- <canvas id="seolinechart8" height="233"></canvas> -->
+                                <div id="socialads" style="height: 345px;"></div>
                             </div>
                         </div>
                     </div>
@@ -364,6 +331,7 @@ window.onload = function() {
     last7day();
     socialFB();
     trendsGraph();
+   
 }
 function mainChart(){
     if ($('#user-statistics').length) {
