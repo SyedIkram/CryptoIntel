@@ -175,7 +175,7 @@ $resultLV    = $futureLV->get();
                                 <?php                   // wait for the result, with an optional timeout
                                 
 
-                                for ($x = 0; $x <= 6; $x++) {
+                                for ($x = 0; $x <= 9; $x++) {
                                     echo '<li><a style="color:#000 !important;" href="coins/?coinsymbol='.$resultLV[$x]['symbol'].'">';
                                     echo '<div class="icon '.$resultLV[$x]['firstalpha'].'">'.$resultLV[$x]['firstalpha'].'</div> '.$resultLV[$x]['coinname'].'<span><i id="livecoin'.$resultLV[$x]['symbol'].'Arrow" class="fa fa-long-arrow-up" ></i>$ <b id="livecoin'.$resultLV[$x]['symbol'].'">0.0</b></span></li>';
 
@@ -206,7 +206,7 @@ $resultLV    = $futureLV->get();
                                             </li>
                                         </ul>
                                     </div>
-                                    <a href="#">Click Here for More</a>
+                                    <!-- <a href="#">Click Here for More</a> -->
                                     <!-- <select id="L2orderSymbolSelector" class="custome-select border-0 pr-3"> -->
                                     <?php 
                                     // foreach ($resultLV as $row){
@@ -570,7 +570,6 @@ function livechartController(){
             p = p+1;
         });
         liveBarChart(allSymbols,allVolume,sLC);
-        // console.log(allVolume);
     });
 
 
@@ -602,13 +601,12 @@ var ms500intr = setInterval(function (){
     }
 
     // fetchforPie('coin_distribution');
-    var prevBTC = LivecoinPrices('BTC','USD','#livecoinBTC',0,'#livecoinBTCArrow');
-    var prevLTC = LivecoinPrices('LTC','USD','#livecoinLTC',0,'#livecoinLTCArrow');
-    var prevETH = LivecoinPrices('ETH','USD','#livecoinETH',0,'#livecoinETHArrow');
-    var prevXRP = LivecoinPrices('XRP','USD','#livecoinXRP',0,'#livecoinXRPArrow');
-    var prevBCH = LivecoinPrices('BCH','USD','#livecoinBCH',0,'#livecoinBCHArrow');
-    var prevEOS = LivecoinPrices('EOS','USD','#livecoinEOS',0,'#livecoinEOSArrow');
-    var prevADA = LivecoinPrices('ADA','USD','#livecoinADA',0,'#livecoinADAArrow');
+
+    <?php foreach ($resultLV as $row){
+
+        echo "var prevBTC = LivecoinPrices('".$row['symbol']."' ,'USD','#livecoin".$row['symbol']."' ,0,'#livecoin".$row['symbol']."Arrow');";
+    }
+        ?>
 
     window.onload = function() {
         liveTrades();
@@ -678,13 +676,11 @@ var livebarchartinterval = setInterval(function(){
 
         fetchforPie('coin_distribution');
         
-        prevBTC = LivecoinPrices('BTC','USD','#livecoinBTC',prevBTC,'#livecoinBTCArrow');
-        prevLTC = LivecoinPrices('LTC','USD','#livecoinLTC',prevLTC,'#livecoinLTCArrow');
-        prevETH = LivecoinPrices('ETH','USD','#livecoinETH',prevETH,'#livecoinETHArrow');
-        prevXRP = LivecoinPrices('XRP','USD','#livecoinXRP',prevXRP,'#livecoinXRPArrow');
-        prevBCH = LivecoinPrices('BCH','USD','#livecoinBCH',prevBCH,'#livecoinBCHArrow');
-        prevEOS = LivecoinPrices('EOS','USD','#livecoinEOS',prevEOS,'#livecoinEOSArrow');
-        prevADA = LivecoinPrices('ADA','USD','#livecoinADA',prevADA,'#livecoinADAArrow');
+        <?php foreach ($resultLV as $row){
+
+echo "var prevBTC = LivecoinPrices('".$row['symbol']."' ,'USD','#livecoin".$row['symbol']."' ,prevBTC,'#livecoin".$row['symbol']."Arrow');";
+        }
+?>
 
         
        
@@ -820,9 +816,17 @@ function fetchforPie(chartID){
 
 <script>
 
+$(document).on('change','#liveTradesStreamSelector',function(){
+    liveTrades();
+    
+});
+
+
 function liveTrades(){
 var streamUrl = "https://streamer.cryptocompare.com/";
-var fsym = "BTC";
+var fsym = $( "#liveTradesStreamSelector option:selected" ).text();
+
+$( "#LiveTradeSymbolID" ).text(fsym);
 var tsym = "USD";
 var currentSubs;
 var currentSubsText = "";
@@ -876,7 +880,7 @@ var transformData = function(data) {
 var displayData = function(dataUnpacked) {
 	var maxTableSize = 7;
     var length = $('#tableMain tr').length;
-    // console.log("Hello" + dataUnpacked);
+    
     if(dataUnpacked.Type == "BUY" && dataUnpacked.Type != "UNKNOWN"){
         $('#trades1').after("<tr >"+
         "<td class='coin-name'   style='color:#028900;'>" + dataUnpacked.Market + "</td>"+

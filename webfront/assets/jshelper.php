@@ -247,7 +247,6 @@ for ($x = 0; $x <= 2; $x++) {
 ?>
 socket.emit('SubAdd', { subs: subscription });
 socket.on("m", function(message) {
-    // console.log(message);
     var messageType = message.substring(0, message.indexOf("~"));
     if (messageType == CCC.STATIC.TYPE.CURRENTAGG) {
         dataUnpack(message);
@@ -353,8 +352,6 @@ var fsym = "BTC";
 var tsym = "USD";
 var api_key="23489088ccc5e95cef763cbedd2d27588a979595edb097f53f40ad7d76239d41";
 var Url = "https://min-api.cryptocompare.com/data/ob/l2/snapshot?fsym=" + fsym + "&e=" + Market + "&api_key=" + api_key;
-
-console.log(Url);
 
 var maxTableSize = 3;
 var length = $('#l2orderBid tr').length;
