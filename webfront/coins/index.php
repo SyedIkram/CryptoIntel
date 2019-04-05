@@ -41,6 +41,15 @@ include $cur_dir.'pages/header.php';
 
 
 ?>
+	<style>
+		.blink {
+		    -webkit-animation: blink 6s step-end infinite;
+		            animation: blink 2s step-end infinite;
+		}
+		@-webkit-keyframes blink { 50% { visibility: hidden; }}
+		        @keyframes blink { 50% { visibility: hidden; }}
+    </style>
+    
 <body onunload="closeSocket()">
 <div id="preloader">
         <div class="loader"></div>
@@ -190,7 +199,7 @@ include $cur_dir.'pages/header.php';
                                 <div class="prc-head">
                                     <h4>Predicted* <?php
                                         date_default_timezone_set('America/Los_Angeles');
-                                    echo '<b>'.$tile_current.'</b> Price for <br>'.date("Y-m-d", strtotime("+1 day")).' PST';?> </h4>
+                                    echo '<b>'.$tile_current.'</b> Price for <br><b>'.date("Y-m-d", strtotime("+1 day")).' PST</b>';?> </h4>
                                 </div>
                                 <div class="prc-list">
                                     <br>
@@ -203,10 +212,16 @@ include $cur_dir.'pages/header.php';
                                         $resultLV2    = $futureLV2->get();    
                                     ?>
                                     <ul>
-                                        <li class="bold"><h1>$ <?php  echo number_format((float)$resultLV2[0]['price'], 4, '.', '');?></h1></li>
+                                        <li class="bold"><h1 class="blink">$ <?php  echo number_format((float)$resultLV2[0]['price'], 4, '.', '');?></h1></li>
                                     </ul>
                                     <br>
                                     <br>
+                                    <br>
+                                    <br>
+                                    <hr>
+                                    <span class="pull-left" style="font-size:0.8em;">* 1. Based on historical OHLCV data.</span><br>
+                                    <span class="pull-left" style="font-size:0.8em; margin-left:8px;">  2. This is not a claim, just a prediction based on Deep Neural Networks.</span><br>
+                                    <span class="pull-left" style="font-size:0.8em; margin-left:8px;">  3. Updates daily at 00:00 am.</span>
                                 </div>
                             </div>
                         <!-- </div> -->

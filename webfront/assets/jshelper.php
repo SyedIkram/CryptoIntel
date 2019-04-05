@@ -186,7 +186,7 @@ function liveBarChart(allSymbols,allVolume,yaxisval){
         "chartCursor": {
             "categoryBalloonEnabled": false,
             "cursorAlpha": 0,
-            "zoomable": false
+            "zoomable": true
         },
         "categoryField": "CC",
         "categoryAxis": {

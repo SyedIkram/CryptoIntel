@@ -1,0 +1,14 @@
+<?php 
+$cma = 0;
+echo 'var subscription = [';
+for ($x = 0; $x <= 2; $x++) {
+        
+        if( $cma > 0){
+            echo ',';
+        }
+        echo '"5~CCCAGG~'.$resultLV[$x]['symbol'].'~USD", "11~'.$resultLV[$x]['symbol'].'"';
+        
+        $cma = $cma + 1;
+    } 
+    echo '];';
+?>

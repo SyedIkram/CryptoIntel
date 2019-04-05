@@ -19,7 +19,7 @@ $session   = $cluster->connect($keyspace);
 
 
 $statementLV = new Cassandra\SimpleStatement(  
-    'select * from top10data limit 10;'
+    'select * from team;'
 );
 $futureLV    = $session->executeAsync($statementLV);  
 $resultLV    = $futureLV->get();    
@@ -66,64 +66,32 @@ $resultLV    = $futureLV->get();
                                         <h1 style="text-align: center;"><?php echo $tile_current;?></h1>
                 </div>
                 <div class="row">
-                <div class="col-xl-4 col-ml-6 col-mdl-4 col-sm-6 mt-5">
-                        <div class="card">
-                            <div class="pricing-list">
-                                <div class="prc-head">
-                                    <h4>Platinum</h4>
-                                </div>
-                                <div class="prc-list">
-                                    <ul>
-                                        <li><a href="#">Term Finnacing & Line of Credit</a></li>
-                                        <li><a href="#">Access up to $10,000</a></li>
-                                        <li><a href="#">Get: Ad Hoc Currency Selection</a></li>
-                                        <li><a href="#">Metered Terms</a></li>
-                                        <li class="bold"><a href="#">Contact for Pricing</a></li>
-                                    </ul>
-                                    <a href="#">Buy Package</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-ml-6 col-mdl-4 col-sm-6 mt-5">
-                        <div class="card">
-                            <div class="pricing-list">
-                                <div class="prc-head">
-                                    <h4>Platinum</h4>
-                                </div>
-                                <div class="prc-list">
-                                    <ul>
-                                        <li><a href="#">Term Finnacing & Line of Credit</a></li>
-                                        <li><a href="#">Access up to $10,000</a></li>
-                                        <li><a href="#">Get: Ad Hoc Currency Selection</a></li>
-                                        <li><a href="#">Metered Terms</a></li>
-                                        <li class="bold"><a href="#">Contact for Pricing</a></li>
-                                    </ul>
-                                    <a href="#">Buy Package</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-xl-4 col-ml-6 col-mdl-4 col-sm-6 mt-5">
-                        <div class="card">
-                            <div class="pricing-list">
-                                <div class="prc-head">
-                                    <h4>Platinum</h4>
-                                </div>
-                                <div class="prc-list">
-                                    <ul>
-                                        <li><a href="#">Term Finnacing & Line of Credit</a></li>
-                                        <li><a href="#">Access up to $10,000</a></li>
-                                        <li><a href="#">Get: Ad Hoc Currency Selection</a></li>
-                                        <li><a href="#">Metered Terms</a></li>
-                                        <li class="bold"><a href="#">Contact for Pricing</a></li>
-                                    </ul>
-                                    <a href="#">Buy Package</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                <?php
+                foreach ($resultLV as $row) {
+
+                    echo '<div class="col-xl-4 col-ml-6 col-mdl-4 col-sm-6 mt-5">';
+                    echo '<div class="card">';
+                    echo '<div class="pricing-list">';
+                    echo '<div class="prc-head">';
+                    echo '<h4>'.$row['name'].'</h4>';
+                    echo '</div>';
+                    echo '<div class="prc-list">';
+                    echo '<ul>';
+                    echo '<img src="'.$cur_dir.'assets/images/team/'.$row['imgurl'].'" class="d-block ui-w-30 rounded-circle" alt="">';
+                    echo '<li><a href="#">Access up to $10,000</a></li>';
+                    echo '<li><a href="#">Get: Ad Hoc Currency Selection</a></li>';
+                    echo '<li><a href="#">Metered Terms</a></li>';
+                    echo '<li class="bold"><a href="#">Contact for Pricing</a></li>';
+                    echo '</ul>';
+                    echo '<a href="#">Buy Package</a>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+
+                }
+                ?>
                 </div>
                 <!-- color pricing end -->
                 
