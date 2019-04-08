@@ -189,101 +189,186 @@ include $cur_dir.'pages/header.php';
                                 <div id="user-statistics"></div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Statistics area end -->
-                    <!-- Advertising area start -->
-                    <div class="col-lg-4 mt-5">
-                        <!-- <div class="card h-full"> -->
-                        <div class="card h-full">
-                            <div class="pricing-list">
-                                <div class="prc-head">
-                                    <h4>Predicted* <?php
-                                        date_default_timezone_set('America/Los_Angeles');
-                                    echo '<b>'.$tile_current.'</b> Price for <br><b>'.date("Y-m-d", strtotime("+1 day")).' PST</b>';?> </h4>
-                                </div>
-                                <div class="prc-list">
-                                    <br>
-                                    <br>
-                                    <?php
-                                        $statementLV2 = new Cassandra\SimpleStatement(  
-                                            "SELECT price from predictedprice WHERE id=".$coin_id
-                                        );
-                                        $futureLV2    = $session->executeAsync($statementLV2);  
-                                        $resultLV2    = $futureLV2->get();    
-                                    ?>
-                                    <ul>
-                                        <li class="bold"><h1 class="blink">$ <?php  echo number_format((float)$resultLV2[0]['price'], 4, '.', '');?></h1></li>
-                                    </ul>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <hr>
-                                    <span class="pull-left" style="font-size:0.8em;">* 1. Based on historical OHLCV data.</span><br>
-                                    <span class="pull-left" style="font-size:0.8em; margin-left:8px;">  2. This is not a claim, just a prediction based on Deep Neural Networks.</span><br>
-                                    <span class="pull-left" style="font-size:0.8em; margin-left:8px;">  3. Updates daily at 00:00 am.</span>
-                                </div>
-                            </div>
-                        <!-- </div> -->
-                        </div>
-                    </div>
-                    <!-- Advertising area end -->
-                    <!-- sales area start -->
-                    <div class="col-xl-8 col-ml-8 col-lg-8 mt-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title">Google Trends of <?php echo $tile_current;?> (2015/01/01 - <?php date_default_timezone_set('America/Los_Angeles'); echo date('Y/m/d');?>)</h4>
-                                <div id="salesanalytic"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- sales area end -->
-                    <!-- timeline area start -->
-                    <div class="col-xl-4 col-ml-4 col-lg-4 mt-5">
-                    <div class="card h-full">
-                            <div class="card-body">
-                                <h4 class="header-title">OHLC <span id="OHLCrange"></span></h4>
-                                <!-- <canvas id="seolinechart8" height="233"></canvas> -->
-                                <div id="socialads" style="height: 345px;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- timeline area end -->
-                    <!-- map area start -->
-                    <div class="col-xl-5 col-lg-12 mt-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title">Marketing Area</h4>
-                                <div id="seomap"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- map area end -->
-                    <!-- testimonial area start -->
-                    <div class="col-xl-7 col-lg-12 mt-5">
-                        <div class="card">
+                    </div>           
+                    
+
+                    <?php
+                    date_default_timezone_set('America/Los_Angeles');
+
+                        if(strcmp($coin_symbol, 'BTC')== 0){
+                            echo '<div class="col-lg-4 mt-5">';
+                            echo '<div class="card h-full">';
+                            echo '<div class="pricing-list">';
+                            echo '<div  class="prc-head">';
+                            echo '<h4 style="background: #0084bf !important">Predicted*';
+                            date_default_timezone_set('America/Los_Angeles');
+                            echo '<b>'.$tile_current.'</b> Price for <br><b>'.date("Y-m-d", strtotime("+1 day")).' PST</b> using News <b>Sentiment</b></h4>';
+                            echo '</div>';
+                            echo '<div class="prc-list">';
+                            echo '<br>';
+                            echo '<br>';
+                        
+                            $statementLV3 = new Cassandra\SimpleStatement(  
+                            "SELECT price from sentimentprice WHERE id=".$coin_id   
+                            );
+                            $futureLV3    = $session->executeAsync($statementLV3);  
+                            $resultLV3    = $futureLV3->get();    
+
+                            echo '<ul>';
+                            echo '<li class="bold"><h1 class="blink">$ ';
+                            echo number_format((float)$resultLV3[0]['price'], 4, '.', '').'</h1></li>';
+                            echo '</ul>';
+                            echo '<br>';
+                            echo '<br>';
+                            echo '<br>';
+                            echo '<hr>';
+                            echo '<span class="pull-left" style="font-size:0.8em;">* 1. Based on historical OHLC and news data.</span><br>';
+                            echo '<span class="pull-left" style="font-size:0.8em; margin-left:8px;">  2. This is not a claim, just a prediction based on Deep Neural Networks.</span><br>';
+                            echo '<span class="pull-left" style="font-size:0.8em; margin-left:8px;">  3. Updates daily at 00:00 am.</span>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                            
+
+                            echo '<div class="col-xl-8 col-ml-8 col-lg-8 mt-5">';
+                            echo '<div class="card">';
+                            echo '<div class="card-body">';
+                            echo '<h4 class="header-title">Google Trends of <?php echo $tile_current;?> (2015/01/01 -'.date('Y/m/d').')</h4>';
+                            echo '<div id="salesanalytic"></div>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+
+                            echo '<div class="col-lg-4 mt-5">';
+                            echo '<div class="card h-full">';
+                            echo '<div class="pricing-list">';
+                            echo '<div class="prc-head">';
+                            echo '<h4>Predicted*';
+                            date_default_timezone_set('America/Los_Angeles');
+                            echo '<b>'.$tile_current.'</b> Price for <br><b>'.date("Y-m-d", strtotime("+1 day")).' PST</b></h4>';
+                            echo '</div>';
+                            echo '<div class="prc-list">';
+                            echo '<br>';
+                            echo '<br>';
+                        
+                            $statementLV2 = new Cassandra\SimpleStatement(  
+                            "SELECT price from predictedprice WHERE id=".$coin_id   
+                            );
+                            $futureLV2    = $session->executeAsync($statementLV2);  
+                            $resultLV2    = $futureLV2->get();    
+
+                            echo '<ul>';
+                            echo '<li class="bold"><h1 class="blink">$ ';
+                            echo number_format((float)$resultLV2[0]['price'], 4, '.', '').'</h1></li>';
+                            echo '</ul>';
+                            echo '<br>';
+                            echo '<br>';
+                            echo '<br>';
+                            echo '<br>';
+                            echo '<hr>';
+                            echo '<span class="pull-left" style="font-size:0.8em;">* 1.  Based on historical OHLCV data.</span><br>';
+                            echo '<span class="pull-left" style="font-size:0.8em; margin-left:8px;">  2. This is not a claim, just a prediction based on Deep Neural Networks.</span><br>';
+                            echo '<span class="pull-left" style="font-size:0.8em; margin-left:8px;">  3. Updates daily at 00:00 am.</span>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+
+
+                            echo '<div class="col-xl-6 col-lg-12 mt-5">';
+                            echo '<div class="card h-full" >';
+                            echo '<div class="card-body">';
+                            echo '<h4 class="header-title" style="margin-bottom:100px !important;">OHLC <span >('.date("Y-m-d", strtotime("-7 day")).' - '.date('Y/m/d', strtotime("-1 day")).')</span></h4>';
+                            echo '<div  id="socialads" style="height: 345px;"></div>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+
+
+                            echo '<div class="col-xl-6 col-lg-12 mt-5">';
+                        }
+                        else{
+                            echo '<div class="col-lg-4 mt-5">';
+                            echo '<div class="card h-full">';
+                            echo '<div class="pricing-list">';
+                            echo '<div class="prc-head">';
+                            echo '<h4>Predicted*';
+                            date_default_timezone_set('America/Los_Angeles');
+                            echo '<b>'.$tile_current.'</b> Price for <br><b>'.date("Y-m-d", strtotime("+1 day")).' PST</b></h4>';
+                            echo '</div>';
+                            echo '<div class="prc-list">';
+                            echo '<br>';
+                            echo '<br>';
+                        
+                            $statementLV2 = new Cassandra\SimpleStatement(  
+                            "SELECT price from predictedprice WHERE id=".$coin_id   
+                            );
+                            $futureLV2    = $session->executeAsync($statementLV2);  
+                            $resultLV2    = $futureLV2->get();    
+
+                            echo '<ul>';
+                            echo '<li class="bold"><h1 class="blink">$ ';
+                            echo number_format((float)$resultLV2[0]['price'], 4, '.', '').'</h1></li>';
+                            echo '</ul>';
+                            echo '<br>';
+                            echo '<br>';
+                            echo '<br>';
+                            echo '<br>';
+                            echo '<hr>';
+                            echo '<span class="pull-left" style="font-size:0.8em;">* 1. Based on historical OHLCV data.</span><br>';
+                            echo '<span class="pull-left" style="font-size:0.8em; margin-left:8px;">  2. This is not a claim, just a prediction based on Deep Neural Networks.</span><br>';
+                            echo '<span class="pull-left" style="font-size:0.8em; margin-left:8px;">  3. Updates daily at 00:00 am.</span>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+
+                            echo '<div class="col-xl-8 col-ml-8 col-lg-8 mt-5">';
+                            echo '<div class="card">';
+                            echo '<div class="card-body">';
+                            echo '<h4 class="header-title">Google Trends of <?php echo $tile_current;?> (2015/01/01 -'.date('Y/m/d').')</h4>';
+                            echo '<div id="salesanalytic"></div>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                            
+                            echo '<div class="col-xl-4 col-ml-4 col-lg-4 mt-5">';
+                            echo '<div class="card h-full" >';
+                            echo '<div class="card-body">';
+                            echo '<h4 class="header-title" style="margin-bottom:100px !important;">OHLC <span >('.date("Y-m-d", strtotime("-7 day")).' - '.date('Y/m/d', strtotime("-1 day")).')</span></h4>';
+                            echo '<div  id="socialads" style="height: 345px;"></div>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';echo '</div>';echo '</div>';
+                            
+
+                            echo '<div class="col-xl-12 col-lg-8 sm-5" > ';
+                        }
+
+                    ?>
+                    
+                        <div class="card" >
                             <div class="card-body">
                             <h4 class="header-title">Latest News on <?php echo $tile_current;?></h4>
                                 <div class="letest-news mt-5">
                                 <?php 
-                                $all_keys = ['847446b32283474fafd2aec7f95e502b','4465f10054b142bc9a8caa115c677a77','40d53e49ee3543a3b162e6a453e2e373',
-                                '211fc2107848473e99c1f235b400a07f','c0f99eab932d4cabb61c23239f3f482d','8ba091b7a47b4c9a9162a83ca72eb1ca',
-                                '2bc85776a0c14af6b9937366ad683e2f','22e5c3a8f0ee4fa59aaf384ba9395a86','c554f8fb27ca4be1862192b44ee4425d'];
+                               
                                 
-                                $url3 = 'https://newsapi.org/v2/everything?q='.str_replace(' ', '', $tile_current).'&apiKey='.$all_keys[mt_rand(0,8)].'&pageSize=2&language=en';
+                                $url3 = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN&categories='.$coin_symbol;
                                 $content3 = file_get_contents($url3);
-                                $json3 = json_decode($content3, true);
+                                $json3 = json_decode($content3, true)['Data'];
                         
-                                // $i = 0;
-                                foreach($json3['articles'] as $item) {                               
-                                        echo '<div class="single-post mb-xs-40 mb-sm-40">';
+                                
+                                for($i = 0; $i < 2; $i++) {                               
+                                        echo '<div class="single-post mb-xs-30 mb-sm-30">';
                                         echo '<div class="lts-thumb">';
-                                        echo '<img src="'.$item['urlToImage'].'" alt="post thumb">';
+                                        echo '<img src="'.$json3[$i]['imageurl'].'" alt="post thumb">';
                                         echo '</div>';
                                         echo '<div class="lts-content">';
-                                        echo '<span>'.$item['source']['name'].'</span>';
-                                        echo '<h2><a target="_blank" href="'.$item['url'].'">'.$item['title'].'</a></h2>';
-                                        $subBody = substr($item['description'],0,175);
+                                        echo '<span>'.$json3[$i]['source_info']['name'].'</span>';
+                                        echo '<h2><a target="_blank" href="'.$json3[$i]['url'].'">'.$json3[$i]['title'].'</a></h2>';
+                                        $subBody = substr($json3[$i]['body'],0,250);
                                         echo '<p>'.$subBody.'...</p>';
                                         echo '</div>';
                                         echo '</div>';
@@ -460,17 +545,14 @@ function mainChart(){
 
 <?php
 
-    $url2 = 'https://min-api.cryptocompare.com/data/histoday?&fsym='.$coin_symbol.'&tsym=USD&limit=7';
+    $url2 = 'https://min-api.cryptocompare.com/data/histoday?&fsym='.$coin_symbol.'&tsym=USD&limit=6';
     $content2 = file_get_contents($url2);
     $json2 = json_decode($content2, true);
 
     
 ?>
 
-<?php
 
-    echo '$("#OHLCrange").text( "('.date("Y-m-d", $json['TimeFrom']).' - '.date("Y-m-d", $json['TimeTo']).' )");';
-?>
 
 function last7day(){
 
@@ -861,7 +943,7 @@ function trendsGraph(){
         "dataProvider": [
 
             <?php
-
+            // $message = exec("home/tkapoor/anaconda3/bin/python phptest.py ".str_replace(' ', '', $tile_current)." ".date("Y-m-d"));
             $message = exec("/anaconda3/bin/python3 phptest.py ".str_replace(' ', '', $tile_current)." ".date("Y-m-d"));
             $message2 = json_decode($message, true);
             // echo $message;

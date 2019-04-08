@@ -14,7 +14,7 @@ require $cur_dir.'vars.php';?>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title><?php echo $title.' - '.$tile_current; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href=<?php echo '"'.$cur_dir.'assets/images/icon/favicon.ico"'?>>
 
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
@@ -37,6 +37,7 @@ require $cur_dir.'vars.php';?>
         foreach ($scripts as $scVal) {
             echo '<script src="'.$cur_dir.$scVal.'"></script>';
         }
+
 
     ?>
 

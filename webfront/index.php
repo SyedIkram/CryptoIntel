@@ -273,7 +273,7 @@ $resultLV    = $futureLV->get();
                                 <div class="letest-news mt-5">
                                 <?php 
                                 $statement = new Cassandra\SimpleStatement(       // also supports prepared and batch statements
-                                    'SELECT id,imageurl,source_info_name,title,body,published_on,url FROM news_cc WHERE sortmentainer=1 ORDER BY published_on DESC LIMIT 2 ALLOW FILTERING'
+                                    'SELECT id,imageurl,source_info_name,title,body,published_on,url,sentiment FROM news_cc WHERE sortmentainer=1 ORDER BY published_on DESC LIMIT 2 ALLOW FILTERING'
                                 );
                                 $future    = $session->executeAsync($statement);  // fully asynchronous and easy parallel execution
                                 $result    = $future->get();                      // wait for the result, with an optional timeout
@@ -285,7 +285,17 @@ $resultLV    = $futureLV->get();
                                         echo '<img src="'.$row['imageurl'].'" alt="post thumb">';
                                         echo '</div>';
                                         echo '<div class="lts-content">';
-                                        echo '<span>'.$row['source_info_name'].'</span>';
+                                        if ((strcmp($row['sentiment'], 'Positive')) == 0){
+                                            echo '<span style="color:#008000;"> Sentiment: '.$row['sentiment'].'</span><br>';
+                                        }
+                                        else if ((strcmp($row['sentiment'], 'Negative')) == 0){
+                                            echo '<span style="color:#e50000;"> Sentiment: '.$row['sentiment'].'</span><br>';
+                                        }
+                                        else{
+                                            echo '<span style="color:#ffdb1a;"> Sentiment: '.$row['sentiment'].'</span><br>';
+                                        }
+                                        
+                                        echo '<span> Source: '.$row['source_info_name'].'</span>';
                                         echo '<h2><a target="_blank" href="'.$row['url'].'">'.$row['title'].'</a></h2>';
                                         $subBody = substr($row['body'],0,175);
                                         echo '<p>'.$subBody.'...</p>';

@@ -1,6 +1,6 @@
 <footer>
             <div class="footer-area">
-                <p><?php echo $title; ?> © Copyright 2019. All right reserved</p>
+                <p>Powered by <?php echo $title; ?> - SFU Big Data (2019)</p>
             </div>
         </footer>
         

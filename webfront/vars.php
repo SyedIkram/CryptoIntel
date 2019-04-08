@@ -1,6 +1,6 @@
 <?php 
 
-$title = 'Crypto Intel';
+$title = 'CRYPTOIntel';
 $keyspace  = 'crypton';
 
 ?>

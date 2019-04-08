@@ -26,6 +26,7 @@ $resultLV    = $futureLV->get();
 
 
 ?>
+
 <body onunload="closeSocket()">
 <div id="preloader">
         <div class="loader"></div>
@@ -78,13 +79,13 @@ $resultLV    = $futureLV->get();
                     echo '</div>';
                     echo '<div class="prc-list">';
                     echo '<ul>';
-                    echo '<img src="'.$cur_dir.'assets/images/team/'.$row['imgurl'].'" class="d-block ui-w-30 rounded-circle" alt="">';
-                    echo '<li><a href="#">Access up to $10,000</a></li>';
-                    echo '<li><a href="#">Get: Ad Hoc Currency Selection</a></li>';
-                    echo '<li><a href="#">Metered Terms</a></li>';
-                    echo '<li class="bold"><a href="#">Contact for Pricing</a></li>';
+                    echo '<img style="height: 250px;display: block;margin-left: auto;margin-right: auto;" src="'.$cur_dir.'assets/images/team/'.$row['imgurl'].'" class="d-block rounded-circle" alt="">';
+
+                    
+                    echo '<li class="bold"><a href="mailto:'.$row['email'].'"><i class="far fa-envelope"></i> : '.$row['email'].'</li>';
+                    echo '<li><a href="#">SFU - Big Data</a></li>';
                     echo '</ul>';
-                    echo '<a href="#">Buy Package</a>';
+                    echo '<a target="_blank" style="background: #0084bf !important;" href="'.$row['linkedin'].'"><i class="fab fa-linkedin"></i></a>';
                     echo '</div>';
                     echo '</div>';
                     echo '</div>';

@@ -16,10 +16,12 @@
                                     echo '<li ><a href="'.$cur_dir.'"><i class="fas fa-home"></i><span>Home</span></a></li>';
                                 }
                             ?>
-                            <li>
-                                <a href="<?php echo $cur_dir.'livesentiment'; ?>"><i class="far fa-surprise"></i><span>Live Sentiment Analysis</span></a>
-                            </li>
                             <?php
+                            if(strcmp($tile_current, 'Live Sentiment Analysis')== 0){
+                                echo '<li class ="active" ><a href="'.$cur_dir.'livesentiment"><i class="fas fa-surprise"></i><span>Live Sentiment Analysis</span></a></li>';
+                            }else{
+                                echo '<li ><a href="'.$cur_dir.'livesentiment"><i class="fas fa-surprise"></i><span>Live Sentiment Analysis</span></a></li>';
+                            }
                                 if(strcmp($tile_current, 'Topic Modeling')== 0 || strcmp($tile_current, 'Correlational Matrix')== 0 || strcmp($tile_current, 'Live Word Cloud Generator of News Articles')== 0){
                                     echo '<li class ="active" >';
                                 }else{
@@ -51,11 +53,16 @@
                                 echo '<li ><a href="'.$cur_dir.'predictions"><i class="fas fa-external-link-square-alt"></i><span>Predictions</span></a></li>';
                             
                                 if(strcmp($tile_current, 'Live Global Transaction Nodes')== 0){
-                                    echo '<li class ="active" ><a href="'.$cur_dir.'globaltransactions"><i class="fas fa-map-marked"></i><span>Live Global Transactions</span></a></li>';
+                                    echo '<li class ="active" ><a href="'.$cur_dir.'globaltransactions"><i class="fas fa-map-marked"></i><span>Global Transaction Nodes</span></a></li>';
                                 }else{
-                                    echo '<li ><a href="'.$cur_dir.'globaltransactions"><i class="fas fa-map-marked"></i><span>Live Global Transactions</span></a></li>';
+                                    echo '<li ><a href="'.$cur_dir.'globaltransactions"><i class="fas fa-map-marked"></i><span>Global Transaction Nodes</span></a></li>';
                                 }
-                            
+                                if(strcmp($tile_current, 'Live Bitcoin Transaction Volume')== 0){
+                                    echo '<li class ="active" ><a href="'.$cur_dir.'bitcointransactionvolume"><i class="fas fa-cubes"></i><span>BTC Transaction Volume</span></a></li>';
+                                }else{
+                                    echo '<li ><a href="'.$cur_dir.'bitcointransactionvolume"><i class="fas fa-cubes"></i><span>BTC Transaction Volume</span></a></li>';
+                                }
+
                                 if(strcmp($tile_current, 'Latest News')== 0){
                                     echo '<li class ="active" ><a href="'.$cur_dir.'latestnews"><i class="fas fa-newspaper"></i><span>Latest News</span></a></li>';
                                 }else{

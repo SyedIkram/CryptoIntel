@@ -361,7 +361,7 @@ $.getJSON(Url, function(data3) {
 
 
     if(data3['Response'] == 'Success'){
-        for (var i = 0 ; i<3 ; ++i){
+        for (var i = 0 ; i<5 ; ++i){
         if (length>= (maxTableSize)) {
             $('#l2orderBid tr:last').remove();
         }
