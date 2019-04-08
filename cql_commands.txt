@@ -60,3 +60,13 @@ INSERT INTO team (id,name,email,linkedin,git,imgurl) VALUES (uuid(),'Mehak Paras
 INSERT INTO team (id,name,email,linkedin,git,imgurl) VALUES (uuid(),'Tushar Chand Kapoor','tckapoor9@gmail.com','https://www.linkedin.com/in/tusharchandkapoor','https://github.com/tusharck','tkapoor.png');
 
 INSERT INTO team (id,name,email,linkedin,git,imgurl) VALUES (uuid(),'Syed Ikram','syedikram62@gmail.com','https://www.linkedin.com/in/iksyed','na','sikram.png');
+
+
+CREATE TABLE IF NOT EXISTS sentimentprice (
+    id INT,
+    price FLOAT,
+    symbol TEXT,
+    PRIMARY KEY (id)
+);
+
+INSERT INTO sentimentprice (id, price, symbol) VALUES (1182,0.0,'BTC');
